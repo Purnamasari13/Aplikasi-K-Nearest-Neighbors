@@ -10,7 +10,7 @@ app = Flask(__name__)
 try:
     model = joblib.load('model.pkl')
     scaler = joblib.load('scaler.pkl')
-    df_iris_raw = pd.read_csv('iris.csv')
+    df_iris_raw = pd.read_csv('Iris.csv')
 
     # Ambil nilai unik untuk dropdown input
     sepal_length_options = df_iris_raw['SepalLengthCm'].unique().tolist()
