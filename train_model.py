@@ -18,7 +18,7 @@ static_dir = os.path.join(current_dir, 'static')
 os.makedirs(static_dir, exist_ok=True)
 
 # Memuat data dan urutkan berdasarkan kolom Id
-csv_path = os.path.join(current_dir, 'iris.csv')
+csv_path = os.path.join(current_dir, 'Iris.csv')
 try:
     df = pd.read_csv(csv_path)
     print("Dataset berhasil dimuat.")
