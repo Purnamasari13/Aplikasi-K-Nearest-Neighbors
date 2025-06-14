@@ -1,0 +1,1082 @@
+/* Reset & Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    /* Main Background: Deep Ocean & Serene Sky Gradient */
+    background: linear-gradient(135deg, #007bff 0%, #00c6ff 25%, #6a11cb 50%, #20e3b2 75%, #007bff 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 20s ease-in-out infinite; /* Durasi lebih panjang, timing lebih halus */
+    min-height: 100vh;
+    color: #333333;
+    position: relative;
+    overflow-x: hidden;
+    will-change: background-position, filter; /* Optimasi performa */
+}
+
+/* Animated Background - Bubbles */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        radial-gradient(circle at 20% 80%, rgba(0, 123, 255, 0.5) 0%, transparent 60%), /* Biru terang, transparansi lebih halus */
+        radial-gradient(circle at 80% 20%, rgba(106, 17, 203, 0.5) 0%, transparent 60%), /* Ungu kebiruan, transparansi lebih halus */
+        radial-gradient(circle at 40% 40%, rgba(32, 227, 178, 0.5) 0%, transparent 60%); /* Hijau kebiruan, transparansi lebih halus */
+    animation: floatingBubbles 25s cubic-bezier(0.4, 0, 0.2, 1) infinite; /* Kurva bezier kustom */
+    pointer-events: none;
+    z-index: -2;
+    will-change: transform, opacity; /* Optimasi performa */
+}
+
+/* Animated Background - Subtle Pattern */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.15'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Background Animation Elements (Floating Shapes) - NEW */
+.background-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -2; /* Pastikan di bawah konten utama */
+    pointer-events: none;
+}
+
+.floating-shape {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.15); /* Slightly visible white shapes */
+    border-radius: 50%;
+    animation: floatAndFade 15s infinite ease-in-out;
+    opacity: 0; /* Start invisible */
+    filter: blur(10px); /* Soft blur */
+}
+
+.floating-shape:nth-child(1) {
+    width: 100px;
+    height: 100px;
+    top: 10%;
+    left: 10%;
+    animation-delay: 0s;
+    animation-duration: 18s;
+}
+.floating-shape:nth-child(2) {
+    width: 150px;
+    height: 150px;
+    top: 50%;
+    left: 70%;
+    animation-delay: 5s;
+    animation-duration: 22s;
+}
+.floating-shape:nth-child(3) {
+    width: 80px;
+    height: 80px;
+    top: 80%;
+    left: 30%;
+    animation-delay: 10s;
+    animation-duration: 16s;
+}
+
+/* Main container - NEW */
+.main-container {
+    padding: 2rem 1rem;
+    position: relative;
+    z-index: 1; /* Pastikan di atas background */
+}
+
+/* Header Styles */
+.header {
+    background: linear-gradient(135deg,
+        rgba(255,255,255,0.98) 0%,
+        rgba(255,255,255,0.9) 50%,
+        rgba(245,248,255,0.95) 100%);
+    border-radius: 25px;
+    padding: 3rem 2.5rem;
+    margin-bottom: 2.5rem;
+    box-shadow:
+        0 20px 40px rgba(0,0,0,0.15),
+        0 0 0 1px rgba(255,255,255,0.3),
+        inset 0 1px 0 rgba(255,255,255,0.9);
+    backdrop-filter: blur(20px);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    animation: fadeInDown 1s ease-out, headerGlow 5s ease-in-out infinite alternate; /* Durasi headerGlow lebih panjang */
+    position: relative;
+    overflow: hidden;
+    will-change: transform, opacity, box-shadow; /* Optimasi performa */
+}
+
+.header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    /* Blue-Green-Purple border for header */
+    background: linear-gradient(90deg,
+        #00c6ff 0%,
+        #007bff 25%,
+        #6a11cb 50%,
+        #20e3b2 75%,
+        #007bff 100%);
+    background-size: 200% 200%;
+    animation: shimmer 3s linear infinite;
+    will-change: background-position; /* Optimasi performa */
+}
+
+.header h2 {
+    /* Header text gradient - matches new main background */
+    background: linear-gradient(135deg, #007bff 0%, #00c6ff 25%, #6a11cb 50%, #20e3b2 75%, #007bff 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: textGradient 10s ease-in-out infinite; /* Durasi lebih panjang, timing lebih halus */
+    font-weight: 800;
+    font-size: 2.5rem;
+    margin-bottom: 1.2rem;
+    text-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    letter-spacing: -0.02em;
+    will-change: background-position, transform; /* Optimasi performa */
+}
+
+.header .lead {
+    color: #555555;
+    font-size: 1.2rem;
+    line-height: 1.7;
+    margin-bottom: 0;
+    font-weight: 400;
+    opacity: 1;
+}
+
+/* Result Card Styles - NEW (Replaces .card for primary content) */
+.result-card {
+    background: linear-gradient(135deg,
+        rgba(255,255,255,0.98) 0%,
+        rgba(255,255,255,0.92) 50%,
+        rgba(248,250,252,0.98) 100%);
+    border: none;
+    border-radius: 25px;
+    box-shadow:
+        0 20px 40px rgba(0,0,0,0.15),
+        0 0 0 1px rgba(255,255,255,0.3);
+    backdrop-filter: blur(20px);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: fadeInUp 1s ease-out;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 2rem;
+    will-change: transform, box-shadow;
+    padding: 5rem 3rem; /* Increased padding to make the box larger */
+    max-width: 900px; /* Set a maximum width for larger screens */
+    margin-left: auto; /* Center the card horizontally */
+    margin-right: auto; /* Center the card horizontally */
+}
+
+/* Floating Particles (applied to result-card) - Moved from .container::before */
+.result-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        radial-gradient(1.5px 1.5px at 10% 20%, rgba(255,255,255,0.8), transparent),
+        radial-gradient(2px 2px at 70% 80%, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 45% 60%, rgba(255,255,255,0.9), transparent),
+        radial-gradient(2.5px 2.5px at 90% 10%, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1.8px 1.8px at 30% 90%, rgba(255,255,255,0.75), transparent),
+        radial-gradient(1.2px 1.2px at 5% 50%, rgba(255,255,255,0.7), transparent),
+        radial-gradient(2.2px 2.2px at 85% 35%, rgba(255,255,255,0.85), transparent);
+    background-size: 200px 200px, 300px 300px, 150px 150px, 250px 250px, 180px 180px, 220px 220px, 280px 280px;
+    animation: sparkle 30s linear infinite;
+    pointer-events: none;
+    z-index: -1;
+    will-change: transform, opacity;
+    border-radius: inherit; /* Pastikan partikel mengikuti border-radius parent */
+}
+
+/* New gradient border for result-card */
+.result-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg,
+        #00c6ff 0%,
+        #007bff 20%,
+        #6a11cb 40%,
+        #20e3b2 60%,
+        #007bff 80%,
+        #00c6ff 100%);
+    background-size: 400% 300%; /* Ukuran gradien lebih besar untuk transisi lebih halus */
+    animation: rainbowShift 5s linear infinite; /* Durasi sedikit lebih cepat */
+    will-change: background-position, transform;
+    z-index: 2; /* Pastikan border di atas konten kartu */
+    border-radius: 25px 25px 0 0; /* Hanya di bagian atas */
+}
+
+.result-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow:
+        0 30px 60px rgba(0,0,0,0.2),
+        0 0 30px rgba(0, 123, 255, 0.3); /* Biru terang untuk hover shadow */
+}
+
+/* Header Sections - NEW */
+.header-section {
+    margin-bottom: 2.5rem;
+    text-align: center;
+}
+
+/* Main Title - NEW */
+.main-title {
+    background: linear-gradient(135deg, #007bff 0%, #00c6ff 25%, #6a11cb 50%, #20e3b2 75%, #007bff 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: textGradient 10s ease-in-out infinite;
+    font-weight: 800;
+    font-size: 3.0rem;
+    margin-bottom: 1.2rem;
+    text-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    letter-spacing: -0.02em;
+    will-change: background-position, transform;
+    text-align: center;
+    display: flex; /* Untuk menengahkan ikon dan teks */
+    justify-content: center;
+    align-items: center;
+    gap: 0.8rem; /* Jarak antara ikon dan teks */
+}
+
+.main-title .icon-left,
+.main-title .icon-right {
+    background: linear-gradient(45deg, #FF6B6B, #FFCD6B); /* Gradient merah-kuning */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 2rem;
+    animation: iconRotate 5s linear infinite; /* Animasi berputar */
+}
+
+/* Prediction Result Text - NEW */
+.prediction-result {
+    display: flex; /* Menggunakan flexbox untuk penataan inline */
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem; /* Jarak antara label dan highlight */
+    margin-bottom: 1.5rem; /* Menyesuaikan margin bawah setelah penggabungan */
+}
+
+.prediction-label {
+    color: #555555; /* Warna teks label biasa */
+    font-weight: 600;
+    font-size: 1.8rem; /* Ukuran font lebih kecil dari highlight */
+    white-space: nowrap; /* Pastikan label tidak putus baris */
+}
+
+/* Prediction Highlight - NEW */
+.prediction-highlight {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    display: inline-block; /* Pastikan ini inline-block agar tetap di baris yang sama */
+    font-weight: 700;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    animation: pulse 2s infinite;
+    font-size: 2.5rem;
+    letter-spacing: 0.05em;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    -webkit-text-fill-color: white !important; /* Memastikan teks putih */
+    background-clip: unset;
+    -webkit-background-clip: unset;
+}
+
+/* Section Title - NEW */
+.section-title {
+    color: #333333;
+    font-weight: 700;
+    margin-bottom: 1.8rem;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    letter-spacing: -0.01em;
+}
+
+.section-title i {
+    background: linear-gradient(135deg, #f093fb, #f5576c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 1.4rem;
+    animation: iconPulse 2s ease-in-out infinite;
+    will-change: transform;
+}
+.section-title:hover i {
+    animation: iconSpin 0.6s ease;
+}
+
+/* Probability Section, Visualization Section, Gallery Section - NEW */
+.probability-section, .visualization-section, .gallery-section {
+    background: linear-gradient(135deg, rgba(255,255,255,0.8), rgba(255,255,255,0.7));
+    border-radius: 16px;
+    padding: 2rem;
+    margin: 2rem 0;
+    border: 1px solid rgba(255,255,255,0.3);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+}
+.probability-section:hover, .visualization-section:hover, .gallery-section:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+}
+
+/* Probability Table - NEW (Similar to .table but distinct) */
+.probability-table {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(20px);
+    border: 2px solid transparent;
+}
+
+.probability-table thead th {
+    background: linear-gradient(135deg,
+        #007bff 0%,
+        #00c6ff 25%,
+        #6a11cb 50%,
+        #20e3b2 75%,
+        #007bff 100%);
+    background-size: 200% 200%;
+    animation: headerGradient 8s ease infinite;
+    color: white;
+    font-weight: 700;
+    border: none;
+    padding: 1.2rem;
+    text-align: center;
+    font-size: 1.05rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    will-change: background-position;
+}
+
+.probability-table tbody td {
+    padding: 1rem 1.2rem;
+    border-color: rgba(0, 123, 255, 0.15);
+    text-align: center;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    color: #333333;
+}
+
+.probability-table tbody tr:hover {
+    background: linear-gradient(135deg,
+        rgba(0, 123, 255, 0.08) 0%,
+        rgba(0, 198, 255, 0.08) 100%);
+    transform: scale(1.01);
+}
+
+.probability-table-striped tbody tr:nth-of-type(odd) {
+    background: linear-gradient(135deg,
+        rgba(240, 248, 255, 0.9) 0%,
+        rgba(230, 240, 250, 0.9) 100%);
+}
+
+/* Probability Badge - NEW */
+.probability-badge {
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+}
+
+/* NEW: Flower Image specifically for the header section */
+.flower-image-in-header {
+    width: 100%;
+    max-width: 400px; /* Batasi lebar maksimum */
+    height: 300px; /* Atur tinggi tetap untuk efek lebih lebar */
+    object-fit: cover; /* Penting: Memotong gambar agar pas dengan tinggi yang ditentukan */
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem; /* Jarak bawah gambar */
+    transition: transform 0.3s ease;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.flower-image-in-header:hover {
+    transform: scale(1.03);
+}
+
+/* Flower Name (Kembali Ditambahkan) - NEW */
+.flower-name {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 600;
+    font-size: 1.3rem;
+    margin-top: 0.5rem; /* Jarak antara gambar dan nama bunga */
+    text-align: center;
+}
+
+/* Action Button - NEW (Similar to .btn-primary but distinct) */
+.action-button {
+    background: linear-gradient(135deg,
+        #007bff 0%,
+        #00c6ff 25%,
+        #6a11cb 50%,
+        #20e3b2 75%,
+        #007bff 100%);
+    background-size: 300% 300%;
+    border: none;
+    border-radius: 15px;
+    padding: 1rem 2.5rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: white;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow:
+        0 8px 25px rgba(0, 123, 255, 0.4),
+        inset 0 1px 0 rgba(255,255,255,0.2);
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    animation: buttonGradient 6s ease infinite;
+    will-change: background-position, transform, box-shadow;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.action-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+        transparent,
+        rgba(255,255,255,0.6),
+        transparent);
+    transition: left 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transform: skewX(-20deg);
+    z-index: 1;
+}
+
+.action-button:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow:
+        0 15px 35px rgba(0, 123, 255, 0.5),
+        0 0 20px rgba(32, 227, 178, 0.3);
+    animation-play-state: paused;
+    color: white; /* Ensure text remains white on hover */
+}
+
+.action-button:active {
+    transform: translateY(-2px) scale(1.02);
+}
+
+/* Form Styles */
+.form-label {
+    color: #333333;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 1.1rem;
+    letter-spacing: -0.01em;
+}
+
+.form-label i {
+    /* Icon gradient - matches new main theme */
+    background: linear-gradient(135deg, #007bff 0%, #00c6ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 1.2rem;
+}
+
+.form-control {
+    border: 3px solid transparent;
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(135deg, #007bff, #00c6ff, #6a11cb) border-box; /* Warna baru untuk border input */
+    border-radius: 15px;
+    padding: 1rem 1.2rem;
+    font-size: 1.05rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-weight: 500;
+    color: #444444; /* Darker input text */
+}
+
+.form-control:focus {
+    outline: none;
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(135deg, #20e3b2, #00c6ff) border-box; /* Fokus dengan warna hijau kebiruan */
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 180, 216, 0.3);
+}
+
+.form-control:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+/* Spectacular Button - Renamed to btn-primary to differentiate from action-button */
+.btn-primary {
+    /* Button background - matches new main theme */
+    background: linear-gradient(135deg,
+        #007bff 0%,
+        #00c6ff 25%,
+        #6a11cb 50%,
+        #20e3b2 75%,
+        #007bff 100%);
+    background-size: 300% 300%;
+    border: none;
+    border-radius: 15px;
+    padding: 1rem 2.5rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: white;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow:
+        0 8px 25px rgba(0, 123, 255, 0.4), /* Biru terang untuk shadow */
+        inset 0 1px 0 rgba(255,255,255,0.2);
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    animation: buttonGradient 6s ease infinite;
+    will-change: background-position, transform, box-shadow; /* Optimasi performa */
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+        transparent,
+        rgba(255,255,255,0.6), /* Glare lebih kuat */
+        transparent);
+    transition: left 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); /* Transisi lebih cepat dan halus */
+    transform: skewX(-20deg); /* Tambahkan efek skew */
+    z-index: 1; /* Pastikan di atas konten tombol */
+}
+
+.btn-primary:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow:
+        0 15px 35px rgba(0, 123, 255, 0.5), /* Biru terang untuk hover shadow */
+        0 0 20px rgba(32, 227, 178, 0.3); /* Hijau kebiruan untuk hover glow */
+    animation-play-state: paused;
+}
+
+.btn-primary:active {
+    transform: translateY(-2px) scale(1.02);
+}
+
+/* Image with Spectacular Effects */
+.img-fluid {
+    border-radius: 20px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow:
+        0 15px 35px rgba(0,0,0,0.1),
+        0 0 0 1px rgba(255,255,255,0.2);
+    border: 3px solid transparent;
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(135deg, #007bff, #00c6ff, #6a11cb) border-box; /* Warna baru untuk border gambar */
+}
+
+.img-fluid:hover {
+    transform: scale(1.05) rotateY(5deg);
+    box-shadow:
+        0 25px 50px rgba(0,0,0,0.25),
+        0 0 30px rgba(0, 123, 255, 0.4); /* Biru terang untuk hover shadow */
+}
+
+/* Advanced Table Styles (General .table, not .probability-table) */
+.table {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(20px);
+    border: 2px solid transparent;
+}
+
+.table thead th {
+    /* Table header background - matches new main background */
+    background: linear-gradient(135deg,
+        #007bff 0%,
+        #00c6ff 25%,
+        #6a11cb 50%,
+        #20e3b2 75%,
+        #007bff 100%);
+    background-size: 200% 200%;
+    animation: headerGradient 8s ease infinite;
+    color: white;
+    font-weight: 700;
+    border: none;
+    padding: 1.2rem;
+    text-align: center;
+    font-size: 1.05rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    will-change: background-position; /* Optimasi performa */
+}
+
+.table tbody td {
+    padding: 1rem 1.2rem;
+    border-color: rgba(0, 123, 255, 0.15); /* Biru terang untuk border tabel */
+    text-align: center;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    color: #333333;
+}
+
+.table tbody tr:hover {
+    background: linear-gradient(135deg,
+        rgba(0, 123, 255, 0.08) 0%,
+        rgba(0, 198, 255, 0.08) 100%); /* Biru terang untuk hover tabel */
+    transform: scale(1.01);
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background: linear-gradient(135deg,
+        rgba(240, 248, 255, 0.9) 0%, /* Lavender blush ringan */
+        rgba(230, 240, 250, 0.9) 100%); /* Biru pucat ringan */
+}
+
+/* Spectacular Alert */
+.alert {
+    border: none;
+    border-radius: 20px;
+    padding: 1.5rem 2rem;
+    backdrop-filter: blur(20px);
+    animation: alertSlideIn 0.6s ease-out;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    will-change: transform, opacity; /* Optimasi performa */
+}
+
+.alert-success {
+    background-color: #5e548e !important; /* Warna ungu yang Anda minta */
+    color: #ffffff !important;
+    border-color: #4a3c6e; /* opsional */
+}
+
+.alert-danger {
+    background: linear-gradient(135deg,
+        rgba(255, 50, 50, 0.15) 0%, /* Merah terang */
+        rgba(200, 0, 0, 0.1) 100%);
+    color: #DC2626;
+    border: 2px solid rgba(255, 50, 50, 0.25); /* Merah terang untuk border */
+    font-weight: 600;
+}
+
+/* Footer Styles - tulisan putih override text-muted */
+footer { /* Mengubah selector menjadi 'footer' agar lebih umum */
+    text-align: center;
+    padding: 1.5rem;
+    color: rgba(255, 255, 255, 0.8) !important; /* Memastikan putih */
+    margin-top: 3rem;
+    font-size: 0.9rem;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+/* Fade In Animation - NEW */
+.fade-in {
+    animation: fadeIn 0.8s ease-out;
+}
+
+/* Enhanced Responsive Design */
+@media (max-width: 768px) {
+    .header {
+        padding: 2.5rem 1.5rem;
+        max-width: 100%;    
+    }
+
+    .header h2 {
+        font-size: 2rem;
+    }
+
+    .main-title { /* NEW */
+        font-size: 2rem;
+        gap: 0.5rem;
+    }
+
+    .main-title .icon-left, /* NEW */
+    .main-title .icon-right {
+        font-size: 1.5rem;
+    }
+
+    .prediction-result { /* NEW */
+        flex-direction: column; /* Tumpuk ke bawah di mobile */
+        gap: 0.2rem;
+        margin-bottom: 1rem;
+    }
+
+    .prediction-label { /* NEW */
+        font-size: 1.3rem;
+    }
+
+    .prediction-highlight { /* NEW */
+        font-size: 1.8rem;
+        padding: 0.6rem 1.5rem;
+    }
+
+    .result-card { /* Using result-card now */
+        margin-bottom: 1.5rem;
+        border-radius: 20px;
+        padding: 1.5rem;
+    }
+
+    .btn-primary, .action-button { /* Apply to both button types */
+        width: 100%;
+        padding: 1.2rem;
+        font-size: 1rem;
+    }
+
+    .flower-image-in-header { /* NEW */
+        max-width: 90%;
+        height: 150px;
+    }
+
+    .flower-name { /* NEW */
+        font-size: 1.1rem;
+    }
+
+    .section-title { /* NEW */
+        font-size: 1.1rem;
+        gap: 0.5rem;
+    }
+}
+
+/* Spectacular Animations */
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+        filter: hue-rotate(0deg);
+    }
+    25% {
+        background-position: 50% 100%; /* Pergeseran diagonal */
+        filter: hue-rotate(45deg);
+    }
+    50% {
+        background-position: 100% 50%;
+        filter: hue-rotate(90deg);
+    }
+    75% {
+        background-position: 50% 0%; /* Pergeseran diagonal */
+        filter: hue-rotate(135deg);
+    }
+    100% {
+        background-position: 0% 50%;
+        filter: hue-rotate(180deg); /* Kembali ke awal dengan perubahan warna */
+    }
+}
+
+/* Floating Shapes Animation - NEW */
+@keyframes floatAndFade {
+    0% {
+        transform: translateY(0) translateX(0) scale(0.5);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1; /* Fade in */
+    }
+    90% {
+        opacity: 1; /* Stay visible */
+    }
+    100% {
+        transform: translateY(-100vh) translateX(50vw) scale(1.2); /* Move up and across */
+        opacity: 0; /* Fade out */
+    }
+}
+
+@keyframes floatingBubbles { /* EXISTING */
+    0% {
+        transform: translateY(0px) rotate(0deg) scale(0.8);
+        opacity: 0.7;
+    }
+    25% {
+        transform: translateY(-40px) rotate(90deg) scale(1.1);
+        opacity: 0.9;
+    }
+    50% {
+        transform: translateY(-80px) rotate(180deg) scale(0.9);
+        opacity: 0.6;
+    }
+    75% {
+        transform: translateY(-40px) rotate(270deg) scale(1.2);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(0px) rotate(360deg) scale(0.8);
+        opacity: 0.7;
+    }
+}
+
+@keyframes sparkle {
+    0% {
+        transform: translate(0px, 0px) scale(0.8);
+        opacity: 0.7;
+    }
+    25% {
+        transform: translate(30px, -20px) scale(1);
+        opacity: 0.9;
+    }
+    50% {
+        transform: translate(-40px, -50px) scale(0.9);
+        opacity: 0.6;
+    }
+    75% {
+        transform: translate(50px, -10px) scale(1.1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate(0px, 0px) scale(0.8);
+        opacity: 0.7;
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) rotateX(10deg);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) rotateX(0deg);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px) rotateX(-10deg);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) rotateX(0deg);
+    }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+}
+
+@keyframes rainbowShift {
+    0% {
+        background-position: 0% 50%;
+        transform: translateY(0px);
+    }
+    50% {
+        background-position: 100% 50%;
+        transform: translateY(-2px); /* Pergeseran vertikal kecil */
+    }
+    100% {
+        background-position: 200% 50%; /* Lanjutkan pergeseran */
+        transform: translateY(0px);
+    }
+}
+
+@keyframes textGradient {
+    0%, 100% {
+        background-position: 0% 50%;
+        transform: scale(1);
+    }
+    50% {
+        background-position: 100% 50%;
+        transform: scale(1.01); /* Sedikit membesar */
+    }
+}
+
+@keyframes buttonGradient {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+@keyframes headerGradient {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+@keyframes headerGlow {
+    0%, 100% {
+        box-shadow:
+            0 20px 40px rgba(0,0,0,0.1),
+            0 0 20px rgba(0, 123, 255, 0.15), /* Biru terang */
+            0 0 0 1px rgba(255,255,255,0.3);
+    }
+    50% {
+        box-shadow:
+            0 25px 50px rgba(0,0,0,0.2),
+            0 0 40px rgba(32, 227, 178, 0.35), /* Hijau kebiruan lebih kuat */
+            0 0 0 2px rgba(255,255,255,0.4);
+    }
+}
+
+@keyframes iconPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+@keyframes alertSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-100px) scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+@keyframes loadingPulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(0.98);
+    }
+}
+
+@keyframes iconRotate { /* NEW */
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse { /* NEW (for prediction-highlight) */
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.8; }
+}
+
+@keyframes fadeIn { /* NEW */
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Loading States */
+.btn-primary:disabled {
+    background: linear-gradient(135deg, #a0aec0 0%, #718096 100%);
+    cursor: not-allowed;
+    animation: loadingPulse 2s ease-in-out infinite;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    /* Scrollbar thumb gradient - matches new main background */
+    background: linear-gradient(135deg, #007bff 0%, #00c6ff 50%, #6a11cb 100%);
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    /* Scrollbar thumb hover - matches new main background */
+    background: linear-gradient(135deg, #6a11cb 0%, #20e3b2 50%, #007bff 100%);
+}
+
+/* Special Effects for Interactive Elements */
+.form-control[type="file"]:hover {
+    background: linear-gradient(135deg,
+        rgba(0, 123, 255, 0.08) 0%,
+        rgba(0, 198, 255, 0.08) 100%); /* Biru terang untuk hover file input */
+}
+
+/* Enhanced Typography */
+.form-text {
+    color: #444444;
+    font-size: 0.95rem;
+    margin-top: 0.8rem;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+.text-danger {
+    color: #cc0000 !important; /* Merah lebih kuat untuk teks danger */
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(204, 0, 0, 0.1);
+}
+
+/* Spectacular Focus States */
+.form-control:focus,
+.btn-primary:focus,
+.action-button:focus { /* Apply focus to action-button too */
+    outline: 3px solid rgba(0, 123, 255, 0.4); /* Biru terang untuk focus outline */
+    outline-offset: 2px;
+}
+
+/* Chrome, Safari, Edge (berbasis WebKit/Chromium) */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Magical Hover Effects for Entire Cards */
+.card:hover h5 i, .result-card:hover .section-title i { /* Apply iconSpin to result-card section titles */
+    animation: iconSpin 0.6s ease;
+}
+
+@keyframes iconSpin {
+    0% { transform: rotateY(0deg) scale(1); }
+    50% { transform: rotateY(180deg) scale(1.2); } /* Rotasi Y */
+    100% { transform: rotateY(360deg) scale(1); }
+}
+

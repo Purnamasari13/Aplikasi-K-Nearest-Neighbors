@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klasifikasi Bunga Iris</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+</head>
+<body>
+
+<div class="background-animation">
+    <div class="floating-shape"></div>
+    <div class="floating-shape"></div>
+    <div class="floating-shape"></div>
+</div>
+
+<div class="container mt-5">
+<header class="header d-flex flex-column justify-content-center align-items-center text-center animate__animated animate__fadeInDown">
+    <h2 class="main-title">
+        <i class="fas fa-seedling icon-left"></i> KLASIFIKASI BUNGA IRIS MENGGUNAKAN DATASET IRIS <i class="fas fa-seedling icon-right"></i>
+    </h1>
+        <p class="lead" style="font-size: 1.4rem; font-weight: 500; color: #4a4a4a;">Masukkan data untuk memprediksi spesies bunga Iris secara instan!</p>
+    </header>
+
+<main class="container d-flex flex-column justify-content-center align-items-center flex-grow-1 py-5">
+    <section class="row justify-content-center w-100">
+        <div class="col-12 col-md-10 col-lg-8 col-xl-7">
+            <div class="card shadow-lg p-4 p-md-5 rounded-4 result-card fade-in">
+                <h2 class="section-title mb-4 animate__animated animate__fadeIn">
+                    <i class="fas fa-flask"></i> Input Data Bunga Iris
+                </h2>
+                <form action="/predict" method="post" class="needs-validation" novalidate>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="sepal_length" class="form-label">Sepal Length (cm)</label>
+                            <select class="form-select" id="sepal_length" name="SepalLengthCm" required>
+                                <option value="" disabled selected>Pilih nilai...</option>
+                                {% for length in sepal_length_options %}
+                                <option value="{{ length }}">{{ length }}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="invalid-feedback">
+                                Mohon pilih Sepal Length.
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="sepal_width" class="form-label">Sepal Width (cm)</label>
+                            <select class="form-select" id="sepal_width" name="SepalWidthCm" required>
+                                <option value="" disabled selected>Pilih nilai...</option>
+                                {% for width in sepal_width_options %}
+                                <option value="{{ width }}">{{ width }}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="invalid-feedback">
+                                Mohon pilih Sepal Width.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label for="petal_length" class="form-label">Petal Length (cm)</label>
+                            <select class="form-select" id="petal_length" name="PetalLengthCm" required>
+                                <option value="" disabled selected>Pilih nilai...</option>
+                                {% for length in petal_length_options %}
+                                <option value="{{ length }}">{{ length }}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="invalid-feedback">
+                                Mohon pilih Petal Length.
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="petal_width" class="form-label">Petal Width (cm)</label>
+                            <select class="form-select" id="petal_width" name="PetalWidthCm" required>
+                                <option value="" disabled selected>Pilih nilai...</option>
+                                {% for width in petal_width_options %}
+                                <option value="{{ width }}">{{ width }}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="invalid-feedback">
+                                Mohon pilih Petal Width.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="action-button">
+                            <i class="fas fa-magic me-2"></i>Prediksi Spesies
+                        </button>
+                    </div>
+
+                    {% if error %}
+                    <div class="alert alert-danger mt-4 text-center animate__animated animate__shakeX">{{ error }}</div>
+                    {% endif %}
+
+                    {% if species %}
+                    <div class="alert alert-success mt-4 text-center fw-bold animate__animated animate__bounceIn">
+                        <div class="prediction-result">
+                            <span class="prediction-label">Prediksi Spesies:</span>
+                            <span class="prediction-highlight">{{ species }}</span>
+                        </div>
+                    </div>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <span>&copy; 2025 | Sistem Klasifikasi Bunga Iris 🌸 | Dibuat dengan Flask, HTML & Bootstrap</span>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    (() => {
+        'use strict';
+        const forms = document.querySelectorAll('.needs-validation');
+        Array.prototype.slice.call(forms).forEach((form) => {
+            form.addEventListener('submit', (event) => {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    })();
+</script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+flask
+werkzeug
+numpy
+pandas
+scikit-learn
+tensorflow-cpu
+protobuf
+gunicorn
+matplotlib
+seaborn
+gunicorn
+joblib
